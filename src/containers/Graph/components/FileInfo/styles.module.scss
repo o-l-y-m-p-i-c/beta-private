@@ -12,8 +12,20 @@
     display: flex;
     justify-content: space-between;
     // align-items: flex-start;
+    // flex-wrap: wrap;
     align-items: center;
-    gap:10px
+    gap:10px;
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    h1{
+        overflow-wrap: anywhere;
+        hyphens: auto;
+    }
+    button{
+        // white-space: nowrap;
+    }
 }
 
 .wrap_inner{
@@ -31,6 +43,13 @@
     border-bottom: 1px solid var(--divider-color);
     &:last-child{
         border: none;
+    }
+    @media screen and (max-width: 768px){
+        grid-template-columns: 1fr;
+        *{
+            text-align: left!important;
+        }
+        
     }
 }
 

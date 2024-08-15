@@ -27,9 +27,9 @@ export const KnowledgeBaseContainer = () => {
 
     const perPage = useIsMobile() ? 5 : 10
 
-    useEffect(()=>{
-        handleFilterClick()
-    },[perPage,useIsMobile])
+    // useEffect(()=>{
+    //     handleFilterClick()
+    // },[perPage,useIsMobile])
 
 
     const formatGetOptions = (arr) => {
