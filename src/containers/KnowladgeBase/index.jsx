@@ -10,10 +10,11 @@ import Typography from '../../components/Typography'
 import { useEffect } from 'react'
 import { filterConstants } from '../../constants/filterConstants'
 import Scrollbar from "react-scrollbars-custom";
+import useIsMobile from '../../hooks/uiHook'
 
 export const TableContext = createContext(null)
 
-const perPage = 5
+
 
 export const KnowledgeBaseContainer = () => {
     const navigate = useNavigate();
@@ -24,6 +25,12 @@ export const KnowledgeBaseContainer = () => {
     let { pageID} = useParams()
     pageID = pageID ?? 1
 
+    const perPage = useIsMobile() ? 5 : 10
+
+    useEffect(()=>{
+        handleFilterClick()
+    },[perPage,useIsMobile])
+
 
     const formatGetOptions = (arr) => {
         if(arr.length === 0) return ''
@@ -31,8 +38,10 @@ export const KnowledgeBaseContainer = () => {
         return optionLabel
     }
 
-    const handleFilterClick = (option) => {
-        const foundFilterOption = filterOptions.find(filterOption => filterOption.title === option.title)
+    const handleFilterClick = (option = {
+        title: ''
+    }) => {
+        const foundFilterOption = filterOptions.find(filterOption => filterOption.title === option?.title)
 
         if(foundFilterOption){
             const newFilterOptions = filterOptions.filter(
@@ -142,32 +151,33 @@ export const KnowledgeBaseContainer = () => {
                 {/* noDefaultStyles */}
                     <Scrollbar >
            
-               
-                        {filterOptions.length === 0 ? collection.filter((item, _index) => _index < perPage * pageID && _index >= perPage * (pageID - 1)).map(
-                            ({id}) => <CollectionItem
-                                key={id}
-                                id={id}
-                                className={styles.table_row}
-                                column_className={styles.table_col}
-                            />
-                        ) : collection.filter((item, index) => {
-                            let isValid = false;
-                            filterOptions.forEach(filterOption => {
-                                const min = filterOption.min
-                                const max = filterOption.max
-                                if(index + 1 >= min && index + 1 <= max){
-                                    isValid = true
-                                }
-                            })
-                            return isValid
-                        }).filter((item, _index) => _index < perPage * pageID && _index >= perPage * (pageID - 1)).map(
-                            ({id}) => <CollectionItem
-                                key={id}
-                                id={id}
-                                className={styles.table_row}
-                                column_className={styles.table_col}
-                            />
-                        ) }
+                        <div className={styles.table_list}>
+                            {filterOptions.length === 0 ? collection.filter((item, _index) => _index < perPage * pageID && _index >= perPage * (pageID - 1)).map(
+                                ({id}) => <CollectionItem
+                                    key={id}
+                                    id={id}
+                                    className={styles.table_row}
+                                    column_className={styles.table_col}
+                                />
+                            ) : collection.filter((item, index) => {
+                                let isValid = false;
+                                filterOptions.forEach(filterOption => {
+                                    const min = filterOption.min
+                                    const max = filterOption.max
+                                    if(index + 1 >= min && index + 1 <= max){
+                                        isValid = true
+                                    }
+                                })
+                                return isValid
+                            }).filter((item, _index) => _index < perPage * pageID && _index >= perPage * (pageID - 1)).map(
+                                ({id}) => <CollectionItem
+                                    key={id}
+                                    id={id}
+                                    className={styles.table_row}
+                                    column_className={styles.table_col}
+                                />
+                            ) }
+                        </div>
                     </Scrollbar>
                 </div>
                 <div className={styles.pagination}>
