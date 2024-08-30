@@ -8,12 +8,12 @@ export const GraphCollectionPage = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Metformin</title>
+        <title>Longevity knowledge graphs</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <MainLayout>
         <div className="">
-          <PageHead title="Metformin" />
+          <PageHead title="Longevity knowledge graphs" />
           <KnowledgeBaseContainer />
         </div>
       </MainLayout>

@@ -31,32 +31,27 @@ export const KnowladgeBaseFilter = () => {
       {/* {filterOptions.map(filterOption => {
             return filterOption.title
         })} */}
-      <Typography type="h4">Range</Typography>
+      <Typography type="h4">Subjects</Typography>
       <ul className={styles.filter_list}>
-        {filterConstants
-          .filter((filterConstant) => filterConstant.type === "InRange")
-          .map((filterConstant) => {
-            const isActive = filterOptions.find(
-              (filterOption) => filterOption.min === filterConstant.min
-            );
+        {filterConstants.map((filterConstant) => {
+          const isActive = filterOptions.find(
+            (filterOption) => filterOption.min === filterConstant.min
+          );
 
-            return (
-              <li
-                key={filterConstant.min}
-                className={cx(
-                  styles.filter_list_item,
-                  isActive && styles.active
-                )}
+          return (
+            <li
+              key={filterConstant.min}
+              className={cx(styles.filter_list_item, isActive && styles.active)}
+            >
+              <button
+                className={cx(styles.filterBtn)}
+                onClick={() => handleFilterClick(filterConstant)}
               >
-                <button
-                  className={cx(styles.filterBtn)}
-                  onClick={() => handleFilterClick(filterConstant)}
-                >
-                  {filterConstant.title}
-                </button>
-              </li>
-            );
-          })}
+                {filterConstant.title}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

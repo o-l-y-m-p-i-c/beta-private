@@ -2,7 +2,7 @@ import { GraphCollectionPage, HomePage } from "../pages";
 
 export const globalPaths = [
   {
-    name: "Metformin",
+    name: "Longevity knowledge graphs",
     path: "/",
     element: <GraphCollectionPage />,
   },
