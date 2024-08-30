@@ -12,6 +12,7 @@ export const Header = () => {
         <div className={styles.header_inner}>
             <Link
                 to="/"
+                className={cx(styles.logo)}
             >
                 <Logo
                     className={cx(styles.logo)}

@@ -7,6 +7,7 @@ import { Graph3D } from "./components/Graph3D"
 import styles from './styles.module.scss'
 import { Button } from "../../components/Button";
 import Typography from "../../components/Typography";
+import { Helmet } from "react-helmet";
 // import {Graph2D} from './components/Graph2D'
 
 export const Graph = () => {
@@ -50,6 +51,11 @@ export const Graph = () => {
                 Back
             </Button>
             <div className={styles.content}>
+            {graph && <Helmet>
+                <meta charSet="utf-8" />
+                <title>{graph.title}</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>}
             {graph && <>
                 <FileInfo 
                     data={graph}
